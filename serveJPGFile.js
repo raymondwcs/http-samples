@@ -30,7 +30,7 @@ function handle_incoming_request(req, res) {
 	else {
 		console.log('File name missing!');
 		res.writeHead(422, {'Content-Type': 'text/plain'});
-		res.write('404 Not Found\n');
+		res.write('File name missing\n');
 		res.end();
 	}
 
