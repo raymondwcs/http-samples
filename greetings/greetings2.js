@@ -5,6 +5,7 @@ var server = http.createServer(function (req,res) {
 	var greetingMsg = "Hello there!";
 
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
+	console.log("REQUEST METHOD: " + req.method);
 
 	var parsedURL = url.parse(req.url,true); //true to get query as object
 	var queryAsObject = parsedURL.query;
@@ -32,13 +33,15 @@ var server = http.createServer(function (req,res) {
 				data += chunk;
 			}); // end req.on()
 			req.on('end', function() {
-				var postData = qs.parse(data);
-				console.log('POST Data: ' + data);
-				var postDataObject = JSON.parse(data);
-				greetingMsg = "Hello " + postDataObject.name;
-	
+				console.log("POST Data: " + data);
+				var qsvars = data.split('&');
+				for (var i = 0; i < qsvars.length; i++) {
+					var nvpair = qsvars[i].split('=');
+					if (nvpair[0] == "name") {
+						greetingMsg = "Hello " + nvpair[1];
+					}
+				}
 				sayHello(res,greetingMsg,parsedURL);
-	
 			}); // end req.on()
 		}
 	}
