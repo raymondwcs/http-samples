@@ -33,6 +33,7 @@ var server = http.createServer(function (req,res) {
 				data += chunk;
 			}); // end req.on()
 			req.on('end', function() {
+				// parse query string such as id=1080&name=raymond
 				console.log("POST Data: " + data);
 				var qsvars = data.split('&');
 				for (var i = 0; i < qsvars.length; i++) {
@@ -48,16 +49,14 @@ var server = http.createServer(function (req,res) {
 });
 
 function sayHello(res,greetingMsg,parsedURL) {
+	res.writeHead(200, {"Content-Type" : "text/html"});
+	res.write('<html><head><title>sayHello</title></head>');
+	res.write('<body><H1>' + greetingMsg + '</H1>');
 
-		res.writeHead(200, {"Content-Type" : "text/html"});
-		res.write('<html><head><title>sayHello</title></head>');
-		res.write('<body><H1>' + greetingMsg + '</H1>');
-
-		if (parsedURL.pathname == '/greetings/sayHelloWithTime') {
-			var today = new Date();
-			res.write('<p>It is now ' + today.toTimeString() + '</p>');
-		}
-		res.end('</body></html>');
-
+	if (parsedURL.pathname == '/greetings/sayHelloWithTime') {
+		var today = new Date();
+		res.write('<p>It is now ' + today.toTimeString() + '</p>');
+	}
+	res.end('</body></html>');
 }
 server.listen(process.env.PORT || 8099);
