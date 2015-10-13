@@ -4,22 +4,15 @@ var url  = require('url');
 var server = http.createServer(function (req,res) {
 	var greetingMsg = "Hello there!";
 
-	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
-	console.log("REQUEST METHOD: " + req.method);
+	console.log("INCOMING REQUEST: " + req.connection.remoteAddress + " " +
+   	                                   req.method + " " + req.url);
 
 	var parsedURL = url.parse(req.url,true); //true to get query as object
 	var queryAsObject = parsedURL.query;
 
-	if (!(
-		parsedURL.pathname == '/greetings' ||
-	    parsedURL.pathname == '/greetings/sayHello' ||
-	    parsedURL.pathname == '/greetings/sayHelloWithTime'
-		)) {
-		res.writeHead(404, {"Content-Type": "text/plain"});
-		res.write("404 Not Found\n");
-		res.end();
-	}
-	else {
+	if (parsedURL.pathname == '/greetings' ||
+		parsedURL.pathname == '/greetings/sayHello' ||
+	    parsedURL.pathname == '/greetings/sayHelloWithTime') {
 		if (req.method == "GET") {
 			if (queryAsObject.name != null) {
 				greetingMsg = "Hello " + queryAsObject.name;
@@ -45,6 +38,11 @@ var server = http.createServer(function (req,res) {
 				sayHello(res,greetingMsg,parsedURL);
 			}); // end req.on()
 		}
+	}
+	else {
+		res.writeHead(404, {"Content-Type": "text/plain"});
+		res.write("404 Not Found\n");
+		res.end();
 	}
 });
 
