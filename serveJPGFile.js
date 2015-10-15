@@ -8,7 +8,7 @@ function handle_incoming_request(req, res) {
 	var queryAsObject = parsedURL.query;
 
 	if (null != queryAsObject.fname) {
-		console.log('Requested file: ' + fname);
+		console.log('Requested file: ' + queryAsObject.fname);
 		var fname = queryAsObject.fname;
 		fs.exists(fname, function(exists) {
 			if (exists) {
