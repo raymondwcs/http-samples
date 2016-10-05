@@ -7,8 +7,6 @@ var ObjectId = require('mongodb').ObjectID;
 var mongourl = 'mongodb://student:password@ds031873.mlab.com:31873/comps381f';
 
 var server = http.createServer(function (req,res) {
-	var greetingMsg = "Hello there!";
-
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
 
 	var parsedURL = url.parse(req.url,true); //true to get query as object
@@ -45,6 +43,7 @@ function read_n_print(res) {
 				console.log('Disconnected MongoDB\n');
 				res.write('<html><head><title>Restaurant</title></head>');
 				res.write('<body><H1>Restaurants</H1>');
+				res.write('<H2>Showing '+restaurants.length+' document(s)</H2>');
 				res.write('<ol>');
 				for (var i in restaurants) {
 					res.write('<li>'+restaurants[i].name+'</li>');
