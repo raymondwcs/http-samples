@@ -11,6 +11,7 @@ function handle_incoming_request(req, res) {
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
 	var parsedURL = url.parse(req.url,true); //true to get query as object 
 	var queryAsObject = parsedURL.query;
+	// extract query string parameters
 	var obj = new Rectangle(queryAsObject.width, queryAsObject.length); 
 
 	res.writeHead(200, {"Content-Type" : "application/json"}); 
