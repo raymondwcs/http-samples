@@ -17,10 +17,16 @@ function handle_incoming_request(req, res) {
          var obj = new Rectangle(queryAsObject.width, queryAsObject.length); 
          res.writeHead(200, {"Content-Type" : "text/html"});
          res.write("<html>");
-         res.write("<head><title>Rectangle Area Calculator</title></head>");
+         res.write("<title>Rectangle Area Calculator</title>");
+         res.write('<meta name="viewport" content="width=device-width, initial-scale=1">');
+         res.write('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">');
+         res.write('<body>');
+         res.write('<div class="w3-container">');         
          res.write("<p>Area of rectangles having length <b>" + queryAsObject.length + "</b>, width <b>" +
                    queryAsObject.width + "</b> is <b>" + obj.area + "</b></p>");
          res.write("<br><a href='javascript:history.back()'>Back</a>");
+         res.write('</div>');         
+         res.write('</body>')         
          res.write("</html>");
          res.end();
          break;
@@ -29,7 +35,11 @@ function handle_incoming_request(req, res) {
       default:
          res.writeHead(200, {"Content-Type" : "text/html"});
          res.write("<html>");
-         res.write("<head><title>Rectangle Area Calculator</title></head>");
+         res.write("<title>Rectangle Area Calculator</title>");
+         res.write('<meta name="viewport" content="width=device-width, initial-scale=1">');
+         res.write('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">');
+         res.write('<body>');
+         res.write('<div class="w3-container">');
          res.write("<form action='/area'>");
          res.write("Length: <input type='number' name='length'>");
          res.write("<br>");
@@ -37,6 +47,8 @@ function handle_incoming_request(req, res) {
          res.write("<br>"); 
          res.write("<input type='submit' value='Calcuate Area'>");       
          res.write("</form>");
+         res.write('</div>');
+         res.write('</body>')
          res.write("</html>");    
          res.end();     
    }
