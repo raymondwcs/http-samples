@@ -14,8 +14,12 @@ formServer = http.createServer(function(req,res) {
       // when no more data in message body
       req.on('end', function() {  
          var post = qs.parse(data);
-         console.log('User Name = ' + post.name);
-         console.log('Password = ' + post.password);
+         res.writeHead(200, {'Content-Type': 'text/html'}); 
+         res.write('<html>')        
+         res.write('User Name = ' + post.name);
+         res.write('<br>')
+         res.write('Password = ' + post.password);
+         res.end('</html>')                 
       })
    }
 });
