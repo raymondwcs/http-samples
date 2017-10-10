@@ -13,6 +13,7 @@ function handle_incoming_request(req,res) {
    res.write('<br>');   
    res.write("Query String: " + url.parse(req.url).query);
    res.write('<br>');   
+ 
    var queryAsObject = parsedURL.query;  // query string (json object)
    console.log(JSON.stringify(queryAsObject));
    var number_of_query_string_parameters = Object.keys(queryAsObject).length;
@@ -27,6 +28,8 @@ function handle_incoming_request(req,res) {
    } else {
       res.write('There is no query string parameter!')
    }
+
+   res.write("<br><br>User Agent: " + req.headers['user-agent']);
    res.end("</body></html>");   
 }
 
