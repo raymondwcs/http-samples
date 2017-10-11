@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 //var mongourl = 'mongodb://localhost:27017/test';
-var mongourl = 'mongodb://student:password@ds155587.mlab.com:55587/scttest06';
+var mongourl = '';
 
 var server = http.createServer(function (req,res) {
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
