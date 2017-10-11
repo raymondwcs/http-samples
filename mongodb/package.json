@@ -5,7 +5,7 @@
 	"dependencies": {
 		"mongodb": "latest"
 	},
-	"scripts" : {
+	"scripts": {
 		"start": "node server.js"
 	},
 	"engine": "*"
