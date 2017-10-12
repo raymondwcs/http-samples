@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 //var mongourl = 'mongodb://localhost:27017/test';
-var mongourl = '';
+var mongourl = 'mongodb://student:password@ds155587.mlab.com:55587/scttest06';
 
 var server = http.createServer(function (req,res) {
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
@@ -36,6 +36,7 @@ function read_n_print(res) {
 			findRestaurants(db,function(restaurants) {
 				db.close();
 				console.log('Disconnected MongoDB\n');
+				res.writeHead(200, {"Content-Type": "text/html"});
 				res.write('<html><head><title>Restaurant</title></head>');
 				res.write('<body><H1>Restaurants</H1>');
 				res.write('<H2>Showing '+restaurants.length+' document(s)</H2>');
