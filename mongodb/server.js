@@ -29,25 +29,25 @@ var server = http.createServer(function (req,res) {
 });
 
 function read_n_print(res) {
-		MongoClient.connect(mongourl, function(err, db) {
-			assert.equal(err,null);
-			console.log('Connected to MongoDB\n');
-			findRestaurants(db,function(restaurants) {
-				db.close();
-				console.log('Disconnected MongoDB\n');
-				res.writeHead(200, {"Content-Type": "text/html"});
-				res.write('<html><head><title>Restaurant</title></head>');
-				res.write('<body><H1>Restaurants</H1>');
-				res.write('<H2>Showing '+restaurants.length+' document(s)</H2>');
-				res.write('<ol>');
-				for (var i in restaurants) {
-					res.write('<li>'+restaurants[i].name+'</li>');
-				}
-				res.write('</ol>');
-				res.end('</body></html>');
-				return(restaurants);
-			}); 
-		});
+	MongoClient.connect(mongourl, function(err, db) {
+		assert.equal(err,null);
+		console.log('Connected to MongoDB\n');
+		findRestaurants(db,function(restaurants) {
+			db.close();
+			console.log('Disconnected MongoDB\n');
+			res.writeHead(200, {"Content-Type": "text/html"});
+			res.write('<html><head><title>Restaurant</title></head>');
+			res.write('<body><H1>Restaurants</H1>');
+			res.write('<H2>Showing '+restaurants.length+' document(s)</H2>');
+			res.write('<ol>');
+			for (var i in restaurants) {
+				res.write('<li>'+restaurants[i].name+'</li>');
+			}
+			res.write('</ol>');
+			res.end('</body></html>');
+			return(restaurants);
+		}); 
+	});
 }
 
 function findRestaurants(db,callback) {
