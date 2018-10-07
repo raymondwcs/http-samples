@@ -3,6 +3,7 @@ var url = require('url');
 
 function handle_incoming_request(req,res) {
    console.log("Incoming request: " + req.url);
+   console.log("Request type: " + req.method);
    var parsedURL = url.parse(req.url,true);  // request url -> json object
 
    res.writeHead(200,{"Content-Type" : "text/html"});
