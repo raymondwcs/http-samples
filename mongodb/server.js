@@ -3,7 +3,8 @@ var url  = require('url');
 var MongoClient = require('mongodb').MongoClient; 
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
-//var mongourl = 'mongodb://localhost:27017/test';
+
+var mongourl = 'mongodb://localhost:27017/test';  // use your mlab database
 
 var server = http.createServer(function (req,res) {
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
@@ -52,7 +53,7 @@ function read_n_print(res) {
 
 function findRestaurants(db,callback) {
 	var restaurants = [];
-	cursor = db.collection('restaurants').find().limit(20); 
+	cursor = db.collection('restaurant').find().limit(20); 
 	cursor.each(function(err, doc) {
 		assert.equal(err, null); 
 		if (doc != null) {

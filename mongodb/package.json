@@ -8,5 +8,7 @@
 	"scripts": {
 		"start": "node server.js"
 	},
-	"engine": "*"
+	"engines": {
+		"node": ">= 6.0.0"
+	}
 }
