@@ -33,8 +33,7 @@ function handle_incoming_request(req, res) {
 		res.write('File name missing\n');
 		res.end();
 	}
-
 }
 
-var s = http.createServer(handle_incoming_request); 
-s.listen(process.env.PORT || 8099);
+var server = http.createServer(handle_incoming_request); 
+server.listen(process.env.PORT || 8099);
