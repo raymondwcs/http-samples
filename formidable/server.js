@@ -20,12 +20,12 @@ var server = http.createServer(function(req,res) {
             var form = new formidable.IncomingForm();
             form.parse(req,function(err,fields,files) {
                 res.writeHead(200, {'Content-Type': 'text/html'}); 
-                res.write('<html>')        
+                res.write('<html>');       
                 res.write('User Name = ' + fields['name']);
-                res.write('<br>')
+                res.write('<br>');
                 res.write('Password = ' + fields['password']);
-                res.end('</html>')   
-            })
+                res.end('</html>');  
+            });
             break;
     }
 });
