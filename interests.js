@@ -17,7 +17,7 @@ class SimpleInterests {
 	}
 }
 // function handle_incoming_request(req,res) {
-handle_incoming_request = (req, res) => {
+const handle_incoming_request = (req, res) => {
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
 	var parsedURL = url.parse(req.url,true); //true to get query as object 
 	var queryAsObject = parsedURL.query;
