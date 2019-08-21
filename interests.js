@@ -1,6 +1,13 @@
 const http = require('http'); 
 const url = require('url');
-
+/*
+function SimpleInterests() {
+	this.principal = p;
+	this.rate = r;
+	this.period = t;
+	this.interests = this.principal * this.rate * this.period;
+}
+*/
 class SimpleInterests {
 	constructor(p,r,t) {
 		this.principal = p;
@@ -9,7 +16,7 @@ class SimpleInterests {
 		this.interests = this.principal * this.rate * this.period;
 	}
 }
-
+// function handle_incoming_request(req,res) {
 handle_incoming_request = (req, res) => {
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
 	var parsedURL = url.parse(req.url,true); //true to get query as object 
