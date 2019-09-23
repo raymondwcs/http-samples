@@ -12,13 +12,13 @@ class Rectangle {
 const server = http.createServer((req, res) => {
    console.log("INCOMING REQUEST: " + req.method + " " + req.url);
    
-   var parsedURL = url.parse(req.url,true);  //true to get query as object
+   let parsedURL = url.parse(req.url,true);  //true to get query as object
+   let queryAsObject = parsedURL.query;
 
    switch(parsedURL.pathname) {
       case '/area':
       case '/api/area':
-         var queryAsObject = parsedURL.query;
-         var obj = new Rectangle(queryAsObject.width, queryAsObject.length); 
+         let obj = new Rectangle(queryAsObject.width, queryAsObject.length); 
          if (parsedURL.pathname == '/area') {
             res.writeHead(200, {"Content-Type" : "text/html"});
             res.write("<html>");
