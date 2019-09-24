@@ -16,6 +16,7 @@ class SimpleInterests {
 		this.interests = this.principal * this.rate * this.period;
 	}
 }
+
 // function handle_incoming_request(req,res) {
 const handle_incoming_request = (req, res) => {
 	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
@@ -27,5 +28,5 @@ const handle_incoming_request = (req, res) => {
 	res.end(JSON.stringify(obj));;
 }
 
-var s = http.createServer(handle_incoming_request); 
-s.listen(process.env.PORT || 8099);
+const server = http.createServer(handle_incoming_request); 
+server.listen(process.env.PORT || 8099);
