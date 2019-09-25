@@ -1,7 +1,9 @@
-var http = require('http');
+const http = require('http');
 
-var server = http.createServer(function (req,res) {
-	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
+const server = http.createServer((req,res) => {
+	let timestamp = new Date().toISOString();
+	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);	
+
 	res.writeHead(200, {"Content-Type" : "text/html"});
 	res.write('<html><head><title>sayHello</title></head>');
 	res.write('<body><H1>Hello There!</H1></body>');

@@ -1,13 +1,15 @@
-var http = require('http');
+const http = require('http');
 
-var server = http.createServer(function (req,res) {
-	var today = new Date();
+const server = http.createServer(function (req,res) {
+	let today = new Date();
+	
+	let timestamp = new Date().toISOString();
+	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);	
 
-	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
 	res.writeHead(200, {"Content-Type" : "text/html"});
 	res.write('<html><head><title>sayHello</title></head>');
 	res.write('<body><H1>Hello There!</H1></body>');
-	res.write('<p>It is now ' + today.toTimeString() + '</p>');
+	res.write(`<p>It is now ${today.toTimeString()} </p>`);
 	res.end('</html>');
 });
 
