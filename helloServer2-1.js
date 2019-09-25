@@ -1,4 +1,3 @@
-// helloServer2-1.js
 // Do more than returning a hello world html page
 // This version determines what to return by looking at the value of a query string parameter 'page'.
 //
