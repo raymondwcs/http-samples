@@ -12,7 +12,7 @@ const url = require('url');
 const helloServer = http.createServer((req,res) => {
 
 	let timestamp = new Date().toISOString();
-    console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
+	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
 
 	var parsedURL = url.parse(req.url,true); // true to get query as object 
 
