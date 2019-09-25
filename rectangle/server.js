@@ -2,7 +2,7 @@ const http = require('http');
 const url = require('url');
 
 class Rectangle {
-   constructor (width,length) { 
+   constructor (width = 1, length = 1) { 
       this.width = width;
       this.length = length;
       this.area = this.width * this.length;
@@ -10,15 +10,14 @@ class Rectangle {
 }
 
 const server = http.createServer((req, res) => {
-   console.log("INCOMING REQUEST: " + req.method + " " + req.url);
+   console.log(`INCOMING REQUEST: ${req.method} ${req.url}`);
    
    let parsedURL = url.parse(req.url,true);  //true to get query as object
-   let queryAsObject = parsedURL.query;
 
    switch(parsedURL.pathname) {
       case '/area':
       case '/api/area':
-         let obj = new Rectangle(queryAsObject.width, queryAsObject.length); 
+         let obj = new Rectangle(parsedURL.query.width, parsedURL.query.length); 
          if (parsedURL.pathname == '/area') {
             res.writeHead(200, {"Content-Type" : "text/html"});
             res.write("<html>");
