@@ -3,9 +3,9 @@ const url = require('url');
 
 const handle_incoming_request = (req,res) => {
    let timestamp = new Date().toISOString();
-	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
+   console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
 
-	var parsedURL = url.parse(req.url,true); // true to get query as object 
+   let parsedURL = url.parse(req.url,true); // true to get query as object 
 
    res.writeHead(200,{"Content-Type" : "text/html"});
    res.write("<html><body>");
@@ -16,7 +16,7 @@ const handle_incoming_request = (req,res) => {
    console.log(`Pathname: ${parsedURL.pathname}`)
    console.log(`Query string parameter(s): ${JSON.stringify(parsedURL.query)}`);
    
-   var number_of_query_string_parameters = Object.keys(parsedURL.query).length;
+   let number_of_query_string_parameters = Object.keys(parsedURL.query).length;
    if (number_of_query_string_parameters > 0) {
       res.write(`No. of query string parameter(s): ${number_of_query_string_parameters}<br>`);
       for (key in parsedURL.query) {
