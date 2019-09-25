@@ -15,6 +15,25 @@ const server = http.createServer((req, res) => {
    let parsedURL = url.parse(req.url,true);  //true to get query as object
 
    switch(parsedURL.pathname) {
+      case '/':
+         res.writeHead(200, {"Content-Type" : "text/html"});
+         res.write("<html>");
+         res.write("<title>Rectangle Area Calculator</title>");
+         res.write('<meta name="viewport" content="width=device-width, initial-scale=1">');
+         res.write('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">');
+         res.write('<body>');
+         res.write('<div class="w3-container">');
+         res.write("<form action='/area'>");
+         res.write("Length: <input type='number' name='length' min=1 value=1>");
+         res.write("<br>");
+         res.write("Width: <input type='number' name='width' min=1 value=1>");     
+         res.write("<br>"); 
+         res.write("<input type='submit' value='Calcuate Area'>");       
+         res.write("</form>");
+         res.write('</div>');
+         res.write('</body>')
+         res.end("</html>");    
+         break;
       case '/area':
       case '/api/area':
          let obj = new Rectangle(parsedURL.query.width, parsedURL.query.length); 
@@ -37,23 +56,10 @@ const server = http.createServer((req, res) => {
          }
          break;
       default:
-         res.writeHead(200, {"Content-Type" : "text/html"});
-         res.write("<html>");
-         res.write("<title>Rectangle Area Calculator</title>");
-         res.write('<meta name="viewport" content="width=device-width, initial-scale=1">');
-         res.write('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">');
-         res.write('<body>');
-         res.write('<div class="w3-container">');
-         res.write("<form action='/area'>");
-         res.write("Length: <input type='number' name='length' min=1 value=1>");
-         res.write("<br>");
-         res.write("Width: <input type='number' name='width' min=1 value=1>");     
-         res.write("<br>"); 
-         res.write("<input type='submit' value='Calcuate Area'>");       
-         res.write("</form>");
-         res.write('</div>');
-         res.write('</body>')
-         res.end("</html>");    
+         res.writeHead(404, {"Content-Type" : "text/html"});
+         res.write("<html><body>");
+         res.write(`<h1>Unknown request: ${parsedURL.pathname}!</h1>`)
+         res.end("</body></html>");    
    }
 });
 
