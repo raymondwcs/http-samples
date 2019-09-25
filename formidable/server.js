@@ -1,11 +1,13 @@
-var http = require('http');
-var url = require('url');
-var formidable = require('formidable');
+const http = require('http');
+const url = require('url');
+const formidable = require('formidable');
 
-var server = http.createServer(function(req,res) {
-    console.log('Request: '+req.url);
-
+const server = http.createServer((req,res) => {
+    let timestamp = new Date().toISOString();
+    console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
+    
     var parsedURL = url.parse(req.url,true);
+
     switch(parsedURL.pathname) {
         case '/':
             res.writeHead(200, {'Content-Type': 'text/html'}); 
@@ -18,15 +20,18 @@ var server = http.createServer(function(req,res) {
             break;
         case '/login':
             var form = new formidable.IncomingForm();
-            form.parse(req,function(err,fields,files) {
+            form.parse(req,(err,fields,files) => {
                 res.writeHead(200, {'Content-Type': 'text/html'}); 
                 res.write('<html>');       
-                res.write('User Name = ' + fields['name']);
+                res.write(`User Name = ${fields['name']}`);
                 res.write('<br>');
-                res.write('Password = ' + fields['password']);
+                res.write(`Password = ${fields['password']}`);
                 res.end('</html>');  
             });
             break;
+        default:
+            res.writeHead(404, {'Content-Type': 'text/plain'}); 
+            res.end(`${parsedURL.pathname} - Unknown Request!`);
     }
 });
 server.listen(process.env.PORT || 8099);
