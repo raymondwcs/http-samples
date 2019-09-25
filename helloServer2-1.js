@@ -9,7 +9,7 @@
 const http = require('http');
 const url = require('url');
 
-const helloServer = http.createServer(function(req,res) {
+const helloServer = http.createServer((req,res) => {
 
 	let timestamp = new Date().toISOString();
     console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
