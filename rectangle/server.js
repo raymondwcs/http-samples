@@ -7,6 +7,10 @@ class Rectangle {
       this.length = length;
       this.area = this.width * this.length;
    }
+
+   toString() {
+      return(`Area of rectangle having length <b>${this.length}</b>, width <b>${this.width}</b> = <b>${this.area}</b>`)
+   }
 }
 
 const server = http.createServer((req, res) => {
@@ -45,7 +49,7 @@ const server = http.createServer((req, res) => {
             res.write('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">');
             res.write('<body>');
             res.write('<div class="w3-container">');         
-            res.write(`<p>Area of rectangles having length <b> ${obj.length} </b>, width <b> ${obj.width}</b> is <b> ${obj.area} </b></p>`);
+            res.write(`<p>${obj.toString()}</p>`);
             res.write("<br><a href='/'>Back</a>");
             res.write('</div>');         
             res.write('</body>')         
