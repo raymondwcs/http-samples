@@ -26,8 +26,8 @@ const server = http.createServer((req, res) => {
             res.write('<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">');
             res.write('<body>');
             res.write('<div class="w3-container">');         
-            res.write(`<p>Area of rectangles having length <b> ${queryAsObject.length} </b>, width <b> ${queryAsObject.width}</b> is <b> ${obj.area} </b></p>`);
-            res.write("<br><a href='javascript:history.back()'>Back</a>");
+            res.write(`<p>Area of rectangles having length <b> ${obj.length} </b>, width <b> ${obj.width}</b> is <b> ${obj.area} </b></p>`);
+            res.write("<br><a href='/'>Back</a>");
             res.write('</div>');         
             res.write('</body>')         
             res.end("</html>");
@@ -45,9 +45,9 @@ const server = http.createServer((req, res) => {
          res.write('<body>');
          res.write('<div class="w3-container">');
          res.write("<form action='/area'>");
-         res.write("Length: <input type='number' name='length'>");
+         res.write("Length: <input type='number' name='length' min=1 value=1>");
          res.write("<br>");
-         res.write("Width: <input type='number' name='width'>");     
+         res.write("Width: <input type='number' name='width' min=1 value=1>");     
          res.write("<br>"); 
          res.write("<input type='submit' value='Calcuate Area'>");       
          res.write("</form>");
