@@ -30,7 +30,7 @@ const handle_incoming_request = (req,res) => {
 		console.log('File name missing!');
 		res.writeHead(422, {'Content-Type': 'text/plain'});
 		res.write('File name missing\n');
-		res.end('GET /fname=ouhk-logo.jpg')
+		res.end('GET ?fname=ouhk-logo.jpg')
 	}
 }
 
