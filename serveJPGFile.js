@@ -11,7 +11,7 @@ const handle_incoming_request = (req,res) => {
 	if (parsedURL.query.fname) {
 		console.log('Requested file: ' + parsedURL.query.fname);
 		let fname = parsedURL.query.fname;
-		fs.exists(fname, function(exists) {
+		fs.exists(fname, function(exists) {  // check if fname exists
 			if (exists) {
 				console.log('Opening file: ' + fname);
 				fs.readFile(fname, function(err,data) {
