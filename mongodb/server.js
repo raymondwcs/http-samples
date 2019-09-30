@@ -1,16 +1,17 @@
-var http = require('http');
-var url  = require('url');
-var MongoClient = require('mongodb').MongoClient; 
-var assert = require('assert');
-var ObjectId = require('mongodb').ObjectID;
+const http = require('http');
+const url  = require('url');
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+const ObjectId = require('mongodb').ObjectID;
+const mongoDBurl = '';
+const dbName = '';
 
-var mongourl = 'mongodb://localhost:27017/test';  // use your mlab database
+const server = http.createServer((req,res) => {
+	let timestamp = new Date().toISOString();
+	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
 
-var server = http.createServer(function (req,res) {
-	console.log("INCOMING REQUEST: " + req.method + " " + req.url);
-
-	var parsedURL = url.parse(req.url,true); //true to get query as object
-
+	let parsedURL = url.parse(req.url,true); // true to get query as object 
+	
 	switch(parsedURL.pathname) {
 		case '/read':
 			read_n_print(res);
@@ -29,13 +30,25 @@ var server = http.createServer(function (req,res) {
 	}
 });
 
-function read_n_print(res) {
-	MongoClient.connect(mongourl, function(err, db) {
+const findRestaurants = (db,callback) => {
+	cursor = db.collection('restaurant').find().limit(20); 
+	cursor.toArray((err,docs) => {
 		assert.equal(err,null);
-		console.log('Connected to MongoDB\n');
-		findRestaurants(db,function(restaurants) {
-			db.close();
-			console.log('Disconnected MongoDB\n');
+		//console.log(docs);
+		callback(docs);
+	});
+}
+
+const read_n_print = (res) => {
+	const client = new MongoClient(mongoDBurl);
+	client.connect((err) => {
+		assert.equal(null,err);
+		console.log("Connected successfully to server");
+		
+		const db = client.db(dbName);
+		findRestaurants(db, (restaurants) => {
+			client.close();
+			console.log('Disconnected MongoDB');
 			res.writeHead(200, {"Content-Type": "text/html"});
 			res.write('<html><head><title>Restaurant</title></head>');
 			res.write('<body><H1>Restaurants</H1>');
@@ -46,21 +59,8 @@ function read_n_print(res) {
 			}
 			res.write('</ol>');
 			res.end('</body></html>');
-			return(restaurants);
-		}); 
-	});
-}
-
-function findRestaurants(db,callback) {
-	var restaurants = [];
-	cursor = db.collection('restaurant').find().limit(20); 
-	cursor.each(function(err, doc) {
-		assert.equal(err, null); 
-		if (doc != null) {
-			restaurants.push(doc);
-		} else {
-			callback(restaurants); 
-		}
+			//return(restaurants);			
+		});
 	});
 }
 
