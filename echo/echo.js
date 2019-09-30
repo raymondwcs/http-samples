@@ -20,7 +20,7 @@ const handle_incoming_request = (req,res) => {
    if (number_of_query_string_parameters > 0) {
       res.write(`No. of query string parameter(s): ${number_of_query_string_parameters}<br>`);
       for (key in parsedURL.query) {
-         res.write(`key = ${parsedURL.query[key]}<br>`);
+         res.write(`${key} = ${parsedURL.query[key]}<br>`);
       }
    } else {
       res.write('There is no query string parameter!<br>')
