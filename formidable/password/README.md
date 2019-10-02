@@ -1,5 +1,5 @@
 # Node.js Example: Server Parsing Forms submitted via POST requests
-An example of parsing HTML forms submitted through POST requests.  This example uses NPM modules [`formidable`](https://www.npmjs.com/package/formidable).
+An example of parsing HTML forms submitted through POST requests.  This example uses NPM module [`formidable`](https://www.npmjs.com/package/formidable).
 ## Getting Started
 
 ### Installing
