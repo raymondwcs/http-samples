@@ -23,9 +23,8 @@ const server = http.createServer((req,res) => {
             form.parse(req,(err,fields,files) => {
                 res.writeHead(200, {'Content-Type': 'text/html'}); 
                 res.write('<html>');       
-                res.write(`User Name = ${fields['name']}`);
-                res.write('<br>');
-                res.write(`Password = ${fields['password']}`);
+                res.write(`<p>User Name = ${fields.name}</p>`);
+                res.write(`<p>Password = ${fields.password}</p>`);
                 res.end('</html>');  
             });
             break;
