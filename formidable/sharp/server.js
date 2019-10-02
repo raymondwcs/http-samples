@@ -24,11 +24,12 @@ const server = http.createServer((req,res) => {
         case '/resize':
             var form = new formidable.IncomingForm();
             form.parse(req,(err,fields,files) => {
+                console.log(files.filetoupload.type);
                 let newHeight = parseInt(fields.height);
                 let newWidth  = parseInt(fields.width);
                 sharp(files.filetoupload.path).resize({height:newHeight,width:newWidth}).toBuffer((err, data) => {
                     assert.equal(err,null);
-                    res.writeHead(200, {'Content-Type': 'image/jpeg'}); 
+                    res.writeHead(200, {'Content-Type': '`${files.filetoupload.type}`'}); 
                     res.end(data);
                 })
             });
