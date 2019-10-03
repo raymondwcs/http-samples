@@ -4,6 +4,7 @@ This example demonstrates how to handle file upload via POST requests using NPM 
 ## Getting Started
 ### Installing
 ```
+npm install sharp
 npm install
 ```
 ### Running
