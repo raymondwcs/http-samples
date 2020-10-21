@@ -18,6 +18,6 @@ const server = http.createServer((req,res) => {
       
       res.end('</body></html>');  // send last piece of response and drop connection
    }
-   req.end();
+   res.end();
 });
 server.listen(process.env.PORT || 8099);
