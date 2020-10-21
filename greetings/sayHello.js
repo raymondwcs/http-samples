@@ -1,4 +1,4 @@
-const http = require('http');  // package/libraris for http operations
+const http = require('http');  // npm package for http operations
 
 const server = http.createServer((req,res) => {  
 	// callback function - 
