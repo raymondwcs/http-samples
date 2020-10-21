@@ -6,16 +6,15 @@ const server = http.createServer((req,res) => {
    
    console.log(req.url);
    
-   // extract path and query string parameters of incoming requests
+   // convert path and query string parameters of incoming requests to JSON
    const parsedURL = url.parse(req.url,true);
-   const queryObject = url.parse(req.url,true).query;
    
    switch(parsedURL.pathname) {
       case '/login':
          res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
          res.write('<html><body>');  // send HTTP response body 
          res.write(`<p>${req.method} request received at ${timestamp}</p>`);
-         res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b></p>`);
+         res.write(`<p>You entered <b>${parsedURL.query.name}</b> and <b>${parsedURL.query.password}</b></p>`);
          res.end('</body></html>');  // send last piece of response and drop connection
          break;
       /*
