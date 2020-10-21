@@ -15,7 +15,7 @@ const server = http.createServer((req,res) => {
          res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
          res.write('<html><body>');  // send HTTP response body 
          res.write(`<p>${req.method} request received at ${timestamp}</p>`);
-         res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
+         res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b></p>`);
          res.end('</body></html>');  // send last piece of response and drop connection
          break;
       /*
