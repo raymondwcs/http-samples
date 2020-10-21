@@ -4,13 +4,16 @@ const url = require('url');
 const server = http.createServer((req,res) => {
    let timestamp = new Date().toISOString();
 
+   // convert the query string parameters in the incoming url to JSON
    const queryObject = url.parse(req.url,true).query;
 
-   res.writeHead(200, {'Content-Type': 'text/html'});
-   res.write('<html><body>')
-   res.write(`<p>${req.method} request received at ${timestamp}</p>`)
+   res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
+   
+   res.write('<html><body>');  // send HTTP response body 
+   res.write(`<p>${req.method} request received at ${timestamp}</p>`);
    res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
-   res.end('</body></html>')
+   
+   res.end('</body></html>');  // send last piece of response and drop connection
 
 });
 server.listen(process.env.PORT || 8099);
