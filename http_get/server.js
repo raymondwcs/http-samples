@@ -6,22 +6,20 @@ const server = http.createServer((req,res) => {
    
    console.log(req.url);
    
-   // convert the query string parameters in the incoming url to JSON
+   // extract path and query string parameters of incoming requests
+   const parsedURL = url.parse(req.url,true);
    const queryObject = url.parse(req.url,true).query;
-
-   if (queryObject.path == '/favicon.ico') {
-      res.writeHead(200, {'Content-Type': 'image/x-icon'} );
-      res.end();
-      console.log('favicon requested');
-      return;
-   }
-   if (queryObject.path == '/login') {
-      res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
    
+   if (parsedURL.pathname == '/favicon.ico') {
+      console.log('favicon requested');
+      res.end();
+   }
+   
+   if (parsedURL.pathname == '/login') {
+      res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
       res.write('<html><body>');  // send HTTP response body 
       res.write(`<p>${req.method} request received at ${timestamp}</p>`);
       res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
-      
       res.end('</body></html>');  // send last piece of response and drop connection
    }
    
