@@ -10,18 +10,23 @@ const server = http.createServer((req,res) => {
    const parsedURL = url.parse(req.url,true);
    const queryObject = url.parse(req.url,true).query;
    
-   if (parsedURL.pathname == '/favicon.ico') {
-      console.log('favicon requested');
-      res.end();
+   switch(parsedURL.pathname) {
+      case '/login':
+         res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
+         res.write('<html><body>');  // send HTTP response body 
+         res.write(`<p>${req.method} request received at ${timestamp}</p>`);
+         res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
+         res.end('</body></html>');  // send last piece of response and drop connection
+         break;
+      /*
+      case '/favicon.ico':
+         console.log('favicon requested');
+         res.end();
+         break;
+      */
+      default:
+         res.writeHead(404, {"Content-Type": "text/plain"});
+         res.end("404 Not Found\n");
    }
-   
-   if (parsedURL.pathname == '/login') {
-      res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
-      res.write('<html><body>');  // send HTTP response body 
-      res.write(`<p>${req.method} request received at ${timestamp}</p>`);
-      res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
-      res.end('</body></html>');  // send last piece of response and drop connection
-   }
-   
 });
 server.listen(process.env.PORT || 8099);

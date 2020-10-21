@@ -3,9 +3,9 @@ const url  = require('url');
 const qs = require('querystring');
 
 const server = http.createServer(function (req,res) {
-	let greetingMsg = "Hello there!";
+	var greetingMsg = "Hello there!";
 
-	let timestamp = new Date().toISOString();
+	var timestamp = new Date().toISOString();
 	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
 
 	const parsedURL = url.parse(req.url,true); //true to get query as object

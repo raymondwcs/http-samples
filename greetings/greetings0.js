@@ -16,7 +16,7 @@ const server = http.createServer(function (req,res) {
 			res.writeHead(200, {"Content-Type" : "text/html"});
 			res.write('<html><head><title>sayHello</title></head>');
 			res.write('<body><H1>' + greetingMsg + '</H1>');
-
+			
 			if (parsedURL.pathname == '/greetings/sayHelloWithTime') {
 				var today = new Date();
 				res.write('<p>It is now ' + today.toTimeString() + '</p>');
