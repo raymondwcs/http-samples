@@ -1,6 +1,8 @@
-const http = require('http');
+const http = require('http');  // package/libraris for http operations
 
-const server = http.createServer((req,res) => {
+const server = http.createServer((req,res) => {  
+	// callback function - 
+	// this function will be called when the server receives inbound http connection requests
 	let timestamp = new Date().toISOString();
 	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);	
 
@@ -10,4 +12,5 @@ const server = http.createServer((req,res) => {
 	res.end('</html>');
 });
 
-server.listen(process.env.PORT || 8099);
+// server listen on port 8099 for inbound http connection requests
+server.listen(process.env.PORT || 8099);  
