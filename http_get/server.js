@@ -17,9 +17,7 @@ const server = http.createServer((req,res) => {
       res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
       
       res.end('</body></html>');  // send last piece of response and drop connection
-   } else {
-      res.writeHead(404, {'Content-Type': 'text/plain'});  // send HTTP response header
-      res.end(`Unknown request: ${queryObject.path}`);
    }
+   req.end();
 });
 server.listen(process.env.PORT || 8099);
