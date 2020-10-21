@@ -3,17 +3,23 @@ const url = require('url');
 
 const server = http.createServer((req,res) => {
    let timestamp = new Date().toISOString();
-
+   
+   console.log(req.url);
+   
    // convert the query string parameters in the incoming url to JSON
    const queryObject = url.parse(req.url,true).query;
 
-   res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
+   if (queryObject.path == '/login') {
+      res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
    
-   res.write('<html><body>');  // send HTTP response body 
-   res.write(`<p>${req.method} request received at ${timestamp}</p>`);
-   res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
-   
-   res.end('</body></html>');  // send last piece of response and drop connection
-
+      res.write('<html><body>');  // send HTTP response body 
+      res.write(`<p>${req.method} request received at ${timestamp}</p>`);
+      res.write(`<p>You entered <b>${queryObject.name}</b> and <b>${queryObject.password}</b>` );
+      
+      res.end('</body></html>');  // send last piece of response and drop connection
+   } else {
+      res.writeHead(404, {'Content-Type': 'text/plain'});  // send HTTP response header
+      res.end(`Unknown request: ${queryObject.path}`);
+   }
 });
 server.listen(process.env.PORT || 8099);
