@@ -9,6 +9,12 @@ const server = http.createServer((req,res) => {
    // convert the query string parameters in the incoming url to JSON
    const queryObject = url.parse(req.url,true).query;
 
+   if (queryObject.path == '/favicon.ico') {
+      res.writeHead(200, {'Content-Type': 'image/x-icon'} );
+      res.end();
+      console.log('favicon requested');
+      return;
+   }
    if (queryObject.path == '/login') {
       res.writeHead(200, {'Content-Type': 'text/html'});  // send HTTP response header
    
@@ -18,6 +24,6 @@ const server = http.createServer((req,res) => {
       
       res.end('</body></html>');  // send last piece of response and drop connection
    }
-   res.end();
+   
 });
 server.listen(process.env.PORT || 8099);
