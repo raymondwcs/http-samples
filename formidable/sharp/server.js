@@ -14,7 +14,7 @@ const server = http.createServer((req,res) => {
         case '/':
             res.writeHead(200, {'Content-Type': 'text/html'}); 
             res.write('<html><body>');
-            res.write('<form action="http://localhost:8099/resize" enctype="multipart/form-data" method="POST">');
+            res.write('<form action="/resize" enctype="multipart/form-data" method="POST">');
             res.write('Image file: <input type="file" name="filetoupload"><br><br>');
             res.write('Rotate (clockwise, 0 - 360 degree): <input type="number" name="rotate" value=0 max=360><br>');
             res.write('New width (no. of pixels): <input type="number" name="width" value=0><br>');
