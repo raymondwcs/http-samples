@@ -4,7 +4,8 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const ObjectId = require('mongodb').ObjectID;
 const mongoDBurl = '';
-const dbName = '';
+
+const dbName = 'test';
 
 const server = http.createServer((req,res) => {
 	let timestamp = new Date().toISOString();
@@ -20,7 +21,7 @@ const server = http.createServer((req,res) => {
 		case '/update':
 		case '/delete':
 			res.writeHead(500, {"Content-Type": "text/plain"});
-			res.write(parsedURL.pathname + " not available yet\n");
+			res.write(`${parsedURL.pathname} not available!!!`);
 			res.end();
 			break;
 		default:
@@ -31,7 +32,7 @@ const server = http.createServer((req,res) => {
 });
 
 const findRestaurants = (db,callback) => {
-	cursor = db.collection('restaurant').find().limit(20); 
+	cursor = db.collection('restaurants').find().limit(20); 
 	cursor.toArray((err,docs) => {
 		assert.equal(err,null);
 		//console.log(docs);
@@ -52,14 +53,13 @@ const read_n_print = (res) => {
 			res.writeHead(200, {"Content-Type": "text/html"});
 			res.write('<html><head><title>Restaurant</title></head>');
 			res.write('<body><H1>Restaurants</H1>');
-			res.write('<H2>Showing '+restaurants.length+' document(s)</H2>');
+			res.write(`<H2>Showing ${restaurants.length} document(s)</H2>`);
 			res.write('<ol>');
 			for (var i in restaurants) {
-				res.write('<li>'+restaurants[i].name+'</li>');
+				res.write(`<li>${restaurants[i].name}</li>`);
 			}
 			res.write('</ol>');
 			res.end('</body></html>');
-			//return(restaurants);			
 		});
 	});
 }
