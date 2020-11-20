@@ -18,6 +18,7 @@ const server = http.createServer(function (req,res) {
 	const parsedURL = url.parse(req.url,true); //true to get query as object
 
 	switch(parsedURL.pathname) {
+		case '/':
 		case '/greetings':
 		case '/greetings/sayHello':
 		case '/greetings/sayHelloWithTime':
