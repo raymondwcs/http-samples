@@ -15,7 +15,7 @@ const formServer = http.createServer((req,res) => {
 
       // when no more data in message body
       req.on('end', () => {  
-         console.log(`POST Data: ${data}`)
+         console.log(`POST Data: ${data}`);
          let postdata = qs.parse(data);
          res.writeHead(200, {'Content-Type': 'text/html'}); 
          res.write('<html>')        
