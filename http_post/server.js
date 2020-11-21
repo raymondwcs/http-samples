@@ -8,7 +8,7 @@ const formServer = http.createServer((req,res) => {
    if (req.method == 'POST') {
       let data = '';  // message body data
 
-      // process data in message body
+      // process data in message body - may receive this event multiple times
       req.on('data', (payload) => {
          data += payload;
       });
