@@ -7,13 +7,13 @@
 
 const http = require('http');
 const url = require('url');
-
-const helloServer = http.createServer((req,res) => {
+const port = 8099;
+const helloServer = http.createServer((req, res) => {
 
 	let timestamp = new Date().toISOString();
 	console.log(`Incoming request ${req.method}, ${req.url} received at ${timestamp}`);
 
-	var parsedURL = url.parse(req.url,true); // true to get query as object 
+	var parsedURL = url.parse(req.url, true); // true to get query as object 
 
 	let title = '';
 	let body = '';
@@ -32,7 +32,7 @@ const helloServer = http.createServer((req,res) => {
 			body = 'Hello World!';
 	}
 
-	res.writeHead(200, {'Content-Type' : 'text/html'});
+	res.writeHead(200, { 'Content-Type': 'text/html' });
 	res.write('<html><head>');
 	res.write(`<title>${title}</title>`);
 	res.write('<head>');
@@ -40,4 +40,4 @@ const helloServer = http.createServer((req,res) => {
 	res.end('</html>');
 });
 
-helloServer.listen(8099);
+helloServer.listen(port);
