@@ -1,19 +1,17 @@
 const http = require('http');
-// const url  = require('url');
 const querystring = require('querystring');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const ObjectId = require('mongodb').ObjectID;
 const mongoDBurl = '';
-
 const dbName = 'test';
 
 const server = http.createServer((req, res) => {
 	const timestamp = new Date().toISOString();
 	const { url, headers, method } = req;
+	const parsedURL = new URL(url, `http://${headers.host}`);
 
 	console.log(`Incoming request ${method}, ${url} received at ${timestamp}`);
-	const parsedURL = new URL(url, `http://${headers.host}`);
 
 	switch (parsedURL.pathname) {
 		case '/read':
